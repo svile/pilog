@@ -1,0 +1,4 @@
+nbproject/
+vendor/
+tst/logs/
+composer.lock
