@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2014, Svilen Piralkov
  * All rights reserved.
@@ -42,7 +43,8 @@ define('TEST_DIR', __DIR__.DIRECTORY_SEPARATOR.'logs');
 // cleanup the test dir for all tests
 rrmdir(TEST_DIR);
 
-function rrmdir($dir) {
+function rrmdir($dir)
+{
     if (is_dir($dir)) {
         foreach(scandir($dir) as $file) {
             if ('.' === $file || '..' === $file) continue;

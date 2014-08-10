@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2014, Svilen Piralkov
  * All rights reserved.
@@ -39,15 +40,18 @@ use Psr\Log\LogLevel;
 use Svile\Pilog\Logger;
 use Svile\Pilog\Output\File;
 
-class LoggerTest extends PHPUnit_Framework_TestCase {
+class LoggerTest extends PHPUnit_Framework_TestCase
+{
 
-    public function testEmptyLoggerAndPsr3Interface() {
+    public function testEmptyLoggerAndPsr3Interface()
+    {
         $log = new Logger();
         $this->assertInstanceOf('Psr\Log\LoggerInterface', $log);
         $log->emergency('This message should not be written anywhere.');
     }
 
-    public function testLoggerNoName() {
+    public function testLoggerNoName()
+    {
         $filename = 'loggerfile';
         $log = new Logger();
         $log->setOutput(new File(TEST_DIR, $filename));
@@ -63,7 +67,8 @@ class LoggerTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse(strpos($c[1], json_encode($context)));
     }
 
-    public function testLoggerWithName() {
+    public function testLoggerWithName()
+    {
         $filename = 'noname';
         $log = new Logger(LogLevel::INFO);
         $log->setOutput(new File(TEST_DIR, $filename));
@@ -82,4 +87,5 @@ class LoggerTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse(strpos($c[1], strtoupper(LogLevel::CRITICAL)));
         $this->assertNotFalse(strpos($c[2], strtoupper(LogLevel::ERROR)));
     }
+
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2014, Svilen Piralkov
  * All rights reserved.
@@ -37,15 +38,14 @@
 
 namespace Svile\Pilog\Output;
 
-use Svile\Pilog\Output\Handle;
-
-class File implements Handle {
+class File implements Handle
+{
     const FILENAME = 'main';
 
     private $file = false;
 
-    public function __construct($dir, $name = self::FILENAME) {
-
+    public function __construct($dir, $name = self::FILENAME)
+    {
         $dir = rtrim($dir, '\\/');
         if (!file_exists($dir)) {
             if (!mkdir($dir)) {
@@ -58,17 +58,20 @@ class File implements Handle {
         if ($this->file === false) {
             throw new RuntimeException('Unable to open file.');
         }
+
         return $this;
     }
 
-    public function __destruct() {
+    public function __destruct()
+    {
         if ($this->file) {
             fclose($this->file);
             $this->file = false;
         }
     }
 
-    public function write($string) {
+    public function write($string)
+    {
         if (fwrite($this->file, $string) === false) {
             RuntimeException('Unable to write to file.');
         }
