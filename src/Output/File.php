@@ -37,8 +37,6 @@
 
 namespace Svile\Pilog\Output;
 
-use Svile\Pilog\Output\Handle;
-
 class File implements Handle {
     const FILENAME = 'main';
 
@@ -49,14 +47,14 @@ class File implements Handle {
         $dir = rtrim($dir, '\\/');
         if (!file_exists($dir)) {
             if (!mkdir($dir)) {
-                throw new RuntimeException('Unable to create log folder.');
+                throw new \RuntimeException('Unable to create log folder.');
             }
         }
 
         $dir = $dir.DIRECTORY_SEPARATOR.$name.'.log';
         $this->file = fopen($dir, 'a');
         if ($this->file === false) {
-            throw new RuntimeException('Unable to open file.');
+            throw new \RuntimeException('Unable to open file.');
         }
         return $this;
     }
@@ -70,7 +68,7 @@ class File implements Handle {
 
     public function write($string) {
         if (fwrite($this->file, $string) === false) {
-            RuntimeException('Unable to write to file.');
+            throw new \RuntimeException('Unable to write to file.');
         }
     }
 }

@@ -37,7 +37,6 @@
 
 namespace Svile\Pilog;
 
-use RuntimeException;
 use Psr\Log\AbstractLogger;
 use Psr\Log\LogLevel;
 use Svile\Pilog\Output\Handle;
@@ -75,10 +74,6 @@ class Logger extends AbstractLogger {
     }
 
     public function setOutput(Handle $output) {
-        if (empty($output)) {
-            throw new RuntimeException('Unable to create handle.');
-        }
-
         $this->output = $output;
     }
 

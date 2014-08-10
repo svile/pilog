@@ -38,7 +38,6 @@
 namespace Svile\Pilog;
 
 use Psr\Log\LogLevel;
-use Svile\Pilog\Logger;
 use Svile\Pilog\Output\Handle;
 
 class Log {
