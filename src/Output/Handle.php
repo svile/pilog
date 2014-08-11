@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2014, Svilen Piralkov
  * All rights reserved.
@@ -37,6 +38,9 @@
 
 namespace Svile\Pilog\Output;
 
-interface Handle {
+interface Handle
+{
+
     public function write($string);
+
 }
