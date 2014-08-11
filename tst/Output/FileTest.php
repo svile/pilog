@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2014, Svilen Piralkov
  * All rights reserved.
@@ -37,16 +38,18 @@
 
 use Svile\Pilog\Output\File;
 
-class FileTest extends PHPUnit_Framework_TestCase {
-
+class FileTest extends PHPUnit_Framework_TestCase
+{
     /**
      * @expectedException Exception
      */
-    public function testEmptyFile() {
+    public function testEmptyFile()
+    {
         $log = new File(null);
     }
 
-    public function testValidDir() {
+    public function testValidDir()
+    {
         $log = new File(TEST_DIR);
         $this->assertFileExists(TEST_DIR.DIRECTORY_SEPARATOR.File::FILENAME.'.log');
         $log->write('Pilog Test Writer String');
@@ -54,7 +57,8 @@ class FileTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse(strpos($c[0], 'Pilog Test Writer String'));
     }
 
-    public function testValidDirAndName() {
+    public function testValidDirAndName()
+    {
         $name = 'filename';
         $log = new File(TEST_DIR, $name);
         $this->assertFileExists(TEST_DIR.DIRECTORY_SEPARATOR.$name.'.log');
@@ -62,4 +66,5 @@ class FileTest extends PHPUnit_Framework_TestCase {
         $c = file(TEST_DIR.DIRECTORY_SEPARATOR.$name.'.log');
         $this->assertNotFalse(strpos($c[0], 'Pilog Test Writer String 3'));
     }
+
 }
