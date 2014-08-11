@@ -1,7 +1,7 @@
 {
     "name": "svile/pilog",
-    "version": "1.0.0",
-    "description": "A simple PHP logging system which is PSR-3 and PSR-4 compliable.",
+    "version": "1.0.2",
+    "description": "A simple PHP logging system which is PSR-2, PSR-3 and PSR-4 compliable.",
     "keywords": ["pilog", "logging", "file", "psr"],
     "require": {
         "php": ">=5.4",
