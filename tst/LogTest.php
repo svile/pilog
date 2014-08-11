@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2014, Svilen Piralkov
  * All rights reserved.
@@ -39,9 +40,11 @@ use Psr\Log\LogLevel;
 use Svile\Pilog\Log;
 use Svile\Pilog\Output\File;
 
-class LogTest extends PHPUnit_Framework_TestCase {
+class LogTest extends PHPUnit_Framework_TestCase
+{
 
-    public function testLoggerNoSetupWithOutput() {
+    public function testLoggerNoSetupWithOutput()
+    {
         $filename = 'testname';
         Log::setOutput(new File(TEST_DIR, $filename));
         Log::critical('This should be written in file '.$filename.'.log');
@@ -56,7 +59,8 @@ class LogTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse(strpos($c[1], json_encode($context)));
     }
 
-    public function testLoggerWithNameAndOutput() {
+    public function testLoggerWithNameAndOutput()
+    {
         $filename = 'svile';
         Log::set(LogLevel::ERROR);
         Log::setOutput(new File(TEST_DIR, $filename));
@@ -75,4 +79,5 @@ class LogTest extends PHPUnit_Framework_TestCase {
         $this->assertNotFalse(strpos($c[1], strtoupper(LogLevel::CRITICAL)));
         $this->assertNotFalse(strpos($c[2], strtoupper(LogLevel::ERROR)));
     }
+
 }
