@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2014, Svilen Piralkov
  * All rights reserved.
@@ -41,7 +42,9 @@ use Psr\Log\AbstractLogger;
 use Psr\Log\LogLevel;
 use Svile\Pilog\Output\Handle;
 
-class Logger extends AbstractLogger {
+class Logger extends AbstractLogger
+{
+
     const PERMISSION = 0775;
     const TIME_FORMAT = 'Y-m-d H:i:s T';
 
@@ -60,24 +63,29 @@ class Logger extends AbstractLogger {
         LogLevel::DEBUG     => 100,
     );
 
-    public function __construct($level = LogLevel::DEBUG, $timeFormat = self::TIME_FORMAT) {
+    public function __construct($level = LogLevel::DEBUG, $timeFormat = self::TIME_FORMAT)
+    {
         $this->level = $level;
         $this->timeFotmat = $timeFormat;
     }
 
-    public function setLevel($level) {
+    public function setLevel($level)
+    {
         $this->level = $level;
     }
 
-    public function setTimeFormat($timeFormat) {
+    public function setTimeFormat($timeFormat)
+    {
         $this->timeFotmat = $timeFormat;
     }
 
-    public function setOutput(Handle $output) {
+    public function setOutput(Handle $output) 
+    {
         $this->output = $output;
     }
 
-    public function log($level, $message, array $context = array()) {
+    public function log($level, $message, array $context = array())
+    {
         if ($this->output === false || $this->levels[$this->level] > $this->levels[$level]) {
             return;
         }
@@ -85,4 +93,5 @@ class Logger extends AbstractLogger {
         $this->output->write('['.gmdate($this->timeFotmat).'] '.strtoupper($level).': '.$message
                 .(empty($context) ? '' : ' '.json_encode($context)).PHP_EOL);
     }
+
 }

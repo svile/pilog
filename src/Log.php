@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2014, Svilen Piralkov
  * All rights reserved.
@@ -40,11 +41,13 @@ namespace Svile\Pilog;
 use Psr\Log\LogLevel;
 use Svile\Pilog\Output\Handle;
 
-class Log {
+class Log
+{
 
     private static $logger = null;
 
-    public static function set($level = LogLevel::DEBUG, $timeFormat = Logger::TIME_FORMAT) {
+    public static function set($level = LogLevel::DEBUG, $timeFormat = Logger::TIME_FORMAT)
+    {
         if (empty(self::$logger)) {
             self::$logger = new Logger($level, $timeFormat);
         } else {
@@ -53,54 +56,68 @@ class Log {
         }
     }
 
-    public static function setLevel($level) {
+    public static function setLevel($level)
+    {
         self::get()->setLevel($level);
     }
 
-    public static function setTimeFormat($timeFormat) {
+    public static function setTimeFormat($timeFormat)
+    {
         self::get()->setTimeFormat($timeFormat);
     }
 
-    public static function setOutput(Handle $output) {
+    public static function setOutput(Handle $output)
+    {
         self::get()->setOutput($output);
     }
 
-    public static function get() {
+    public static function get()
+    {
         if (empty(self::$logger)) {
             self::$logger = new Logger();
         }
+
         return self::$logger;
     }
 
-    public static function emergency($message, array $context = array()) {
+    public static function emergency($message, array $context = array())
+    {
         self::get()->emergency($message, $context);
     }
 
-    public static function alert($message, array $context = array()) {
+    public static function alert($message, array $context = array())
+    {
         self::get()->alert($message, $context);
     }
 
-    public static function critical($message, array $context = array()) {
+    public static function critical($message, array $context = array())
+    {
         self::get()->critical($message, $context);
     }
 
-    public static function error($message, array $context = array()) {
+    public static function error($message, array $context = array())
+    {
         self::get()->error($message, $context);
     }
 
-    public static function warning($message, array $context = array()) {
+    public static function warning($message, array $context = array())
+    {
         self::get()->warning($message, $context);
     }
 
-    public static function notice($message, array $context = array()) {
+    public static function notice($message, array $context = array())
+    {
         self::get()->notice($message, $context);
     }
 
-    public static function info($message, array $context = array()) {
+    public static function info($message, array $context = array())
+    {
         self::get()->info($message, $context);
     }
 
-    public static function debug($message, array $context = array()) {
+    public static function debug($message, array $context = array())
+    {
         self::get()->debug($message, $context);
     }
+
 }
