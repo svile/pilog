@@ -42,16 +42,37 @@ use Psr\Log\AbstractLogger;
 use Psr\Log\LogLevel;
 use Svile\Pilog\Output\Handle;
 
+/**
+ * This is a simple Logger implementation
+ *
+ * @package Svile\Pilog
+ */
 class Logger extends AbstractLogger
 {
 
-    const PERMISSION = 0775;
+    /**
+     * Default format of the outputted date string
+     */
     const TIME_FORMAT = 'Y-m-d H:i:s T';
 
+    /**
+     * @var null|string Log level
+     */
     private $level = null;
-    private $timeFotmat = null;
+
+    /**
+     * @var null|string The format of the outputted date string
+     */
+    private $timeFormat = null;
+
+    /**
+     * @var boolean|Handle Output handler
+     */
     private $output = false;
 
+    /**
+     * @var array Available log levels
+     */
     private $levels = array(
         LogLevel::EMERGENCY => 800,
         LogLevel::ALERT     => 700,
@@ -63,35 +84,81 @@ class Logger extends AbstractLogger
         LogLevel::DEBUG     => 100,
     );
 
+    /**
+     * Constructor
+     *
+     * @param string $level      Level
+     * @param string $timeFormat The format of the outputted date string
+     *
+     * @return self
+     */
     public function __construct($level = LogLevel::DEBUG, $timeFormat = self::TIME_FORMAT)
     {
         $this->level = $level;
-        $this->timeFotmat = $timeFormat;
+        $this->timeFormat = $timeFormat;
     }
 
+    /**
+     * Sets log level
+     *
+     * @param string $level Level to set
+     *
+     * @return void
+     */
     public function setLevel($level)
     {
         $this->level = $level;
     }
 
+    /**
+     * Sets time format
+     *
+     * @param string $timeFormat The format of the outputted date string
+     *
+     * @return void
+     */
     public function setTimeFormat($timeFormat)
     {
-        $this->timeFotmat = $timeFormat;
+        $this->timeFormat = $timeFormat;
     }
 
-    public function setOutput(Handle $output) 
+    /**
+     * Sets output handler
+     *
+     * @param Handle $output Handler
+     *
+     * @return void
+     */
+    public function setOutput(Handle $output)
     {
         $this->output = $output;
     }
 
+    /**
+     * Writes a log message
+     *
+     * @param mixed  $level   An arbitrary level
+     * @param string $message A log message
+     * @param array  $context An arbitrary data
+     *
+     * @return void
+     */
     public function log($level, $message, array $context = array())
     {
         if ($this->output === false || $this->levels[$this->level] > $this->levels[$level]) {
             return;
         }
 
-        $this->output->write('['.gmdate($this->timeFotmat).'] '.strtoupper($level).': '.$message
-                .(empty($context) ? '' : ' '.json_encode($context)).PHP_EOL);
+        $this->output->write(
+            sprintf(
+                '[%s] %s: %s%s%s',
+                gmdate($this->timeFormat),
+                strtoupper($level),
+                $message,
+                empty($context) ? '' : ' ' . json_encode($context),
+                PHP_EOL
+            )
+        );
     }
 
 }

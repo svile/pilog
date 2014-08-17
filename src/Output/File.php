@@ -38,19 +38,39 @@
 
 namespace Svile\Pilog\Output;
 
+/**
+ * File output handler
+ *
+ * @package Svile\Pilog\Output
+ */
 class File implements Handle
 {
 
+    /**
+     * Default filename
+     */
     const FILENAME = 'main';
 
+    /**
+     * @var boolean|resource Opened file
+     */
     private $file = false;
 
+    /**
+     * Construct
+     *
+     * @param string $dir  The path to the logs directory
+     * @param string $name Filename
+     *
+     * @return self
+     * @throws \RuntimeException Unable to create log directory or open file
+     */
     public function __construct($dir, $name = self::FILENAME)
     {
         $dir = rtrim($dir, '\\/');
         if (!file_exists($dir)) {
             if (!mkdir($dir)) {
-                throw new \RuntimeException('Unable to create log folder.');
+                throw new \RuntimeException('Unable to create log directory.');
             }
         }
 
@@ -59,10 +79,11 @@ class File implements Handle
         if ($this->file === false) {
             throw new \RuntimeException('Unable to open file.');
         }
-
-        return $this;
     }
 
+    /**
+     * Cleanup
+     */
     public function __destruct()
     {
         if ($this->file) {
@@ -71,11 +92,18 @@ class File implements Handle
         }
     }
 
+    /**
+     * Writes a message to file
+     *
+     * @param string $string A message
+     * @return void
+     * @throws \RuntimeException Unable to write message
+     */
     public function write($string)
     {
         if (fwrite($this->file, $string) === false) {
             throw new \RuntimeException('Unable to write to file.');
         }
     }
-    
+
 }
