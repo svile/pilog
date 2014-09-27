@@ -38,9 +38,21 @@
 
 namespace Svile\Pilog\Output;
 
+/**
+ * Interface for output handlers
+ *
+ * @package Svile\Pilog\Output
+ */
 interface Handle
 {
 
+    /**
+     * Writes a message
+     *
+     * @param string $string A log message
+     *
+     * @return mixed
+     */
     public function write($string);
 
 }
