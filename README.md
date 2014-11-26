@@ -1,3 +1,5 @@
+This is a fork of [Pilog](https://github.com/svile/pilog) ... Please use that project.
+
 # Pilog
 
 A simple PHP logging system which is PSR-3 and PSR-4 compliable.
