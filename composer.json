@@ -1,5 +1,5 @@
 {
-    "name": "svile/pilog",
+    "name": "terah/pilog",
     "version": "1.0.3",
     "description": "A simple PHP logging system which is PSR-2, PSR-3 and PSR-4 compliable.",
     "keywords": ["pilog", "logging", "file", "psr"],
@@ -19,7 +19,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Svile\\Pilog\\": "src"
+            "Terah\\Pilog\\": "src"
         },
         "classmap": ["src/"]
     }
