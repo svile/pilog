@@ -54,6 +54,10 @@ class Log
      */
     private static $logger = null;
 
+    public static function setLogger(\Psr\Log\AbstractLogger $logger)
+    {
+        static::$logger = $logger;
+    }
     /**
      * Setup logger
      *
