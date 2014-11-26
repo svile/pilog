@@ -89,13 +89,18 @@ class Logger extends AbstractLogger
      *
      * @param string $level      Level
      * @param string $timeFormat The format of the outputted date string
+     * @param Svile\Pilog\Output\Handle $output
      *
      * @return self
      */
-    public function __construct($level = LogLevel::DEBUG, $timeFormat = self::TIME_FORMAT)
+    public function __construct($level = LogLevel::DEBUG, $timeFormat = self::TIME_FORMAT, \Svile\Pilog\Output\Handle $output = null)
     {
         $this->level = $level;
         $this->timeFormat = $timeFormat;
+        if ( ! is_null($output) )
+        {
+            $this->setOutput($output);
+        }
     }
 
     /**
