@@ -59,7 +59,7 @@ class File implements Handle
     /**
      * Construct
      *
-     * @param string $dir  The path to the logs directory
+     * @param string|resource $dir  The path to the logs directory, or a resource like STDOUT, STDERR, etc
      * @param string $name Filename
      *
      * @return self
@@ -67,6 +67,12 @@ class File implements Handle
      */
     public function __construct($dir, $name = self::FILENAME)
     {
+        
+        if (gettype($dir) === 'resource') {
+            $this->file = $dir;
+            return;
+        }
+        
         $dir = rtrim($dir, '\\/');
         if (!file_exists($dir)) {
             if (!mkdir($dir)) {
