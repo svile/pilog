@@ -1,3 +1,5 @@
+# NOTE: This project is no longer maintained
+
 # Pilog
 
 A simple PHP logging system which is PSR-3 and PSR-4 compliable.
